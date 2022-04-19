@@ -14,6 +14,18 @@ PRO is_netcdf_granule_quicklook_or_refined,$
 ;
 ;------------------------------------------------------------------------------------------------
 
+isVM = LMGR(/VM)
+
+IF isVM THEN BEGIN
+
+   void = DIALOG_MESSAGE(['Please contact the author', $
+
+      'for licensing instructions'])
+
+   RETURN
+
+ENDIF
+
 args = COMMAND_LINE_ARGS(COUNT = argCount);
 
 IF argCount EQ 0 THEN BEGIN
