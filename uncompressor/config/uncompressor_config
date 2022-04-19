@@ -12,12 +12,14 @@ setenv PATH /usr/local/netcdf/bin:/usr/local/bin:/bin:/usr/bin:/opt/local/bin:/u
 setenv GHRSST_SIGEVENT_URL http://test.test.com:8080
 
 # Points to where the Perl & IDL codes are installed.
-setenv GHRSST_PERL_LIB_DIRECTORY $HOME/generate/workspace/generate/uncompressor/perl
-setenv GHRSST_IDL_LIB_DIRECTORY  $HOME/generate/workspace/generate/uncompressor/idl
+# setenv GHRSST_PERL_LIB_DIRECTORY $HOME/generate/workspace/generate/uncompressor/perl    # NET edit. (Local)
+setenv GHRSST_PERL_LIB_DIRECTORY /app/perl    # NET edit. (Docker container)
+# setenv GHRSST_IDL_LIB_DIRECTORY  $HOME/generate/workspace/generate/uncompressor/idl    # NET edit. (Local)
+setenv GHRSST_IDL_LIB_DIRECTORY  /app/idl    # NET edit. (Docker container)
 
 # Scratch directory to store temporary files.
-setenv SCRATCH_AREA /data/dev/tebaldi/uncompressor/scratch    # NET edit. (Local)
-# setenv SCRATCH_AREA /data/scratch    # NET edit. (Docker container)
+# setenv SCRATCH_AREA /data/dev/tebaldi/uncompressor/scratch    # NET edit. (Local)
+setenv SCRATCH_AREA /data/scratch    # NET edit. (Docker container)
 
 # Debug mode
 setenv GHRSST_MODIS_L2_UNCOMPRESSOR_DEBUG_MODE false    # Used by modis_level2_uncompressor.pl
@@ -29,9 +31,9 @@ setenv GHRSST_MODIS_L2_USE_FILE_LOCK  true
 setenv GHRSST_MODIS_L2_USE_PERL_FUNCTION_TO_GET_REFINED_FLAG false
 
 # Path to log file.
-setenv UNCOMPRESSOR_LOGGING /data/dev/tebaldi/uncompressor/logs    # NET edit. (Local)
-# setenv UNCOMPRESSOR_LOGGING /data/logs    # NET edit. (Docker container)
+# setenv UNCOMPRESSOR_LOGGING /data/dev/tebaldi/uncompressor/logs    # NET edit. (Local)
+setenv UNCOMPRESSOR_LOGGING /data/logs    # NET edit. (Docker container)
 
 # Path to job directory
-setenv UNCOMPRESSOR_JOB_DIR /data/dev/tebaldi/uncompressor/jobs    # NET edit. (Local)
-# setenv UNCOMPRESSOR_JOB_DIR /data/jobs    # NET edit. (Docker container)
+# setenv UNCOMPRESSOR_JOB_DIR /data/dev/tebaldi/uncompressor/jobs    # NET edit. (Local)
+setenv UNCOMPRESSOR_JOB_DIR /data/jobs    # NET edit. (Docker container)
