@@ -17,9 +17,7 @@
 # See below for the names for each script.  There should be 2 for the uncompression and 4 for the combining.
 
 # Set the environments.
-
-# source $HOME/define_modis_operation_environment_for_combiner    # NET edit.
-source $HOME/generate/workspace/generate/uncompressor/config/uncompressor_config
+source /app/config/uncompressor_config    # NET edit (Docker container)
 
 # Get the input.
 
