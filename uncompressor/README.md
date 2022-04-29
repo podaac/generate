@@ -29,13 +29,13 @@ To compile IDL files:
 ## execute command
 
 MODIS A: 
-`docker run --name gen-test -v /uncompressor/input:/input -v /uncompressor/logs:/logs -v /uncompressor/jobs:/jobs -v /uncompressor/scratch:/scratch -v /usr/local:/usr/local uncompressor:0.1 20 yes /data/input MODIS_A yes`
+`docker run --name gen-test -v /uncompressor/input:/input -v /uncompressor/logs:/logs -v /uncompressor/jobs:/jobs -v /uncompressor/scratch:/scratch -v /usr/local:/usr/local uncompressor:0.1 20 yes /data/input MODIS_A`
 
 MODIS T: 
-`docker run --name gen-uncomp -v /uncompressor/input:/input -v /uncompressor/logs:/logs -v /uncompressor/jobs:/jobs -v /uncompressor/scratch:/scratch -v /usr/local:/usr/local uncompressor:0.1 20 yes /data/input MODIS_T yes`
+`docker run --name gen-uncomp -v /uncompressor/input:/input -v /uncompressor/logs:/logs -v /uncompressor/jobs:/jobs -v /uncompressor/scratch:/scratch -v /usr/local:/usr/local uncompressor:0.1 20 yes /data/input MODIS_T`
 
 VIIRS: 
-`docker run --name gen-uncomp -v /uncompressor/input:/input -v /uncompressor/logs:/logs -v /uncompressor/jobs:/jobs -v /uncompressor/scratch:/scratch -v /usr/local:/usr/local uncompressor:0.1 20 yes /data/input VIIRS yes`
+`docker run --name gen-uncomp -v /uncompressor/input:/input -v /uncompressor/logs:/logs -v /uncompressor/jobs:/jobs -v /uncompressor/scratch:/scratch -v /usr/local:/usr/local uncompressor:0.1 20 yes /data/input VIIRS`
 
 **NOTES**
 - In order for the commands to execute the `/uncompressor/` directories will need to point to actual directories on the system.
