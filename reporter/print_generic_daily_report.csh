@@ -15,7 +15,7 @@
 # The shell script calls the Perl subroutine with the same name.
 #
 
-source $HOME/define_ghrsst_operation_environment
+source /app/reporter_config
 
 set i_first_arg = $argv[1]
 
@@ -30,7 +30,8 @@ set i_email_flag  = ""
 if $i_first_arg == "-h" then
     # Print the -h options from Perl script and exit.
     echo "Help argument request"
-    set perl_script_command = "perl $GHRSST_PERL_LIB_DIRECTORY/print_generic_daily_report.pl -h" 
+    # set perl_script_command = "perl $GHRSST_PERL_LIB_DIRECTORY/print_generic_daily_report.pl -h" 
+    set perl_script_command = "perl /app/print_generic_daily_report.pl -h" 
     $perl_script_command
 else
     set i_instrument  = $argv[1]
@@ -69,13 +70,14 @@ else
 #echo "HERE [$i_report_date]"
 #echo "HERE [$i_report_year]"
 #echo "HERE [$i_email_flag]"
-    set PERL_SCRIPT_LOCATION = $GHRSST_PERL_LIB_DIRECTORY
-    set perl_script_command = "perl $GHRSST_PERL_LIB_DIRECTORY/print_generic_daily_report.pl "
+    # set PERL_SCRIPT_LOCATION = $GHRSST_PERL_LIB_DIRECTORY
+    # set perl_script_command = "perl $GHRSST_PERL_LIB_DIRECTORY/print_generic_daily_report.pl "
+    set perl_script_command = "perl /app/print_generic_daily_report.pl"
 
 #echo "[$perl_script_command]"
 
   # Create an empty report file.
-  set REPORT_FILENAME = $SCRATCH_AREA/viirs_daily_report_${i_instrument}_${i_data_type}.txt
+  set REPORT_FILENAME = $REPORT_DIR/viirs_daily_report_${i_instrument}_${i_data_type}.txt
   rm -f $REPORT_FILENAME
   touch $REPORT_FILENAME
 
@@ -98,6 +100,11 @@ endif
 #
 
 if ((x$i_email_flag == x"-m") && ($report_created_flag == "yes")) then
+
+  # Start postfix
+
+  /etc/init.d/postfix start
+
   # Send the email of the output content.
 
   set EMAIL_RECIPIENT_LIST = $OPS_MODIS_MONITOR_EMAIL_LIST
@@ -113,7 +120,15 @@ if ((x$i_email_flag == x"-m") && ($report_created_flag == "yes")) then
   #
   #  Send the report to intended recipients.
   #
-  mail -s "$the_subject" $EMAIL_RECIPIENT_LIST < $REPORT_FILENAME 
+  mail -s "$the_subject" $EMAIL_RECIPIENT_LIST -a FROM:reporter@generate.app < $REPORT_FILENAME 
+  
+  # Sleep to allow mail to send
+
+  sleep 5
+
+  # Stop postfix
+  
+  /etc/init.d/postfix stop
 
 else
    if ($report_created_flag != "yes") then

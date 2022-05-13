@@ -53,9 +53,9 @@
 #
 ####################################################################################################
 
-$GHRSST_PERL_LIB_DIRECTORY = $ENV{GHRSST_PERL_LIB_DIRECTORY};
+# $GHRSST_PERL_LIB_DIRECTORY = $ENV{GHRSST_PERL_LIB_DIRECTORY};
 
-do "$GHRSST_PERL_LIB_DIRECTORY/read_configuration_file.pl";
+# do "$GHRSST_PERL_LIB_DIRECTORY/read_configuration_file.pl";
 
 my $g_L2P_registry = "";   # Global variable to hold the name of the registry file.
 
@@ -80,18 +80,8 @@ sub print_daily_report_from_processed_file_registry
 #    my $scratch_area = "/home/ghrsst_ps/scratch"; 
 
     # Depend on the processing type, use different registry.
-    if ($i_data_type eq "QUICKLOOK") {
-        if ($i_instrument eq "MODIS_A" or $i_instrument eq "MODIS_T") {
-            $g_L2P_registry = $scratch_area . "/ghrsst_master_list_processed_files.dat";
-        } else {
-            $g_L2P_registry = $scratch_area . "/ghrsst_master_" . lc($i_instrument) . "_" . lc($i_data_type) . "_list_processed_files.dat";
-        }
-    } elsif ($i_data_type eq "REFINED") {
-        if ($i_instrument eq "MODIS_A" or $i_instrument eq "MODIS_T") {
-            $g_L2P_registry = $scratch_area . "/ghrsst_master_refined_list_processed_files.dat";
-        } else {
-            $g_L2P_registry = $scratch_area . "/ghrsst_master_" . lc($i_instrument) . "_" . lc($i_data_type) . "_list_processed_files.dat";
-        }
+    if ($i_data_type eq "QUICKLOOK" or $i_data_type eq "REFINED")  {
+        $g_L2P_registry = $scratch_area . "/ghrsst_master_" . lc($i_instrument) . "_" . lc($i_data_type) . "_list_processed_files.dat";
     } else {
         print "print_generic_daily_report: Unrecognized processing type.  No need to continue\n";
         print "print_generic_daily_report: i_data_type = [$i_data_type]\n";
@@ -143,13 +133,8 @@ sub print_generic_daily_report
   }
 
   # Check to make sure the log archive can be found.
-
-  my $archive_filename = "";
-  if ($i_instrument eq "MODIS_A" or $i_instrument eq "MODIS_T") {
-      $archive_filename = $ENV{SCRATCH_AREA} . "/ghrsst_processing_log_archive.txt";
-  } else {
-      $archive_filename = $ENV{SCRATCH_AREA} . "/ghrsst_" . lc($i_instrument) . "_processing_log_archive.txt";
-  }
+  
+  $archive_filename = $ENV{PROCESSING_LOGS} . "/ghrsst_" . lc($i_instrument) . "_processing_log_archive.txt";
 #print "i_instrument [$i_instrument]\n";
 #print "archive_filename [$archive_filename]\n";
 #exit(0);
