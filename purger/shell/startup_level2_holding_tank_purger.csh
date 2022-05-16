@@ -16,7 +16,7 @@
 
 # Set the environments.
 
-source $HOME/define_modis_operation_environment_for_combiner
+source /app/config/purger_config
 
 # Get the input.
 
@@ -45,13 +45,13 @@ if ($2 != '') then
     set i_perform_disk_space_count_only = $2 
 endif
 
-# Create the $HOME/logs directory if it does not exist yet
+# Create the logs directory if it does not exist yet
 
-if (! -e $HOME/logs) then
-    mkdir $HOME/logs
+set logging_dir = `printenv | grep PURGER_LOGGING | awk -F= '{print $2}'`    # NET edit.
+if (! -e $logging_dir) then    # NET edit.
+    mkdir $logging_dir    # NET edit.
 endif
-
-set log_top_level_directory = "$HOME/logs"
+set log_top_level_directory = $logging_dir     # NET edit.
 
 set today_date = `date '+%m_%d_%y'`
 
