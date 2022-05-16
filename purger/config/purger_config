@@ -1,0 +1,18 @@
+################################################################################
+#
+# This file contains environment variables for running the Purger component in
+# the Generate Program.
+#
+################################################################################
+
+# Points to where the Perl codes are installed.
+setenv GHRSST_PERL_LIB_DIRECTORY /app/perl
+
+# Configuration file
+setenv GHRSST_DATA_CONFIG_FILE /app/config/ghrsst_data_config_file.dat
+
+# Scratch directory to store temporary files and registry.
+setenv SCRATCH_AREA /data/scratch
+
+# Path to log file.
+setenv PURGER_LOGGING /data/logs

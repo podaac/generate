@@ -19,7 +19,6 @@
 #------------------------------------------------------------------------------------------------
 
 $GHRSST_PERL_LIB_DIRECTORY = $ENV{GHRSST_PERL_LIB_DIRECTORY};
-$GHRSST_IDL_LIB_DIRECTORY  = $ENV{GHRSST_IDL_LIB_DIRECTORY};
 
 $GHRSST_DATA_CONFIG_FILE = "";
 
@@ -98,7 +97,7 @@ sub purge_l2_temporary_files {
             $modis_data_name_prefix = "T";
     } elsif ($i_processing_type eq "VIIRS_QUICKLOOK") {
             $modis_search_directory = get_ghrsst_config("VIIRS_QUICKLOOK");
-            $modis_data_name_prefix = "V";
+            $modis_data_name_prefix = "S";
     } elsif ($i_processing_type eq "AQUA_REFINED") {
             $modis_search_directory = get_ghrsst_config("AQUA_REFINED");
             $modis_data_name_prefix = "A";
@@ -107,7 +106,7 @@ sub purge_l2_temporary_files {
             $modis_data_name_prefix = "T";
     } elsif ($i_processing_type eq "VIIRS_REFINED") {
             $modis_search_directory = get_ghrsst_config("VIIRS_REFINED");
-            $modis_data_name_prefix = "V";
+            $modis_data_name_prefix = "S";
     } else {
             die("purge_l2_temporary_files:ERROR: Does recognize processing type [$i_processing_type]");
     }

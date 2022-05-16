@@ -38,11 +38,11 @@ LOCAL_MACHINE_SHELL_BIN_DIRECTORY  /bin
 #       as is because that is the name of the dataset.  You can change the top level directory above them.
 #   3.  The configuration cannot perform environment variable substitution.  The values on the right hand side must be literal.
 
-AQUA_QUICKLOOK   modis/MODIS_AQUA_L2_SST_OBPG_QUICKLOOK
-TERRA_QUICKLOOK  modis/MODIS_TERRA_L2_SST_OBPG_QUICKLOOK
+AQUA_QUICKLOOK   /data/scratch/MODIS_AQUA_L2_SST_OBPG_QUICKLOOK
+TERRA_QUICKLOOK  /data/scratch/MODIS_TERRA_L2_SST_OBPG_QUICKLOOK
 
-AQUA_REFINED      modis/refined_aqua/aqua/2015/215
-TERRA_REFINED      modis/MODIS_TERRA_L2_SST_OBPG_REFINED
+AQUA_REFINED     /data/scratch/MODIS_AQUA_L2_SST_OBPG_REFINED
+TERRA_REFINED    /data/scratch/MODIS_TERRA_L2_SST_OBPG_REFINED
 
-VIIRS_QUICKLOOK    modis/VIIRS_L2_SST_OBPG_QUICKLOOK
-VIIRS_REFINED      modis/VIIRS_L2_SST_OBPG_REFINED
+VIIRS_QUICKLOOK  /data/scratch/VIIRS_L2_SST_OBPG_QUICKLOOK
+VIIRS_REFINED    /data/scratch/VIIRS_L2_SST_OBPG_REFINED

@@ -17,7 +17,7 @@
 
 # Set the environments.
 
-source $HOME/define_modis_operation_environment_for_combiner
+source /app/config/purger_config
 
 # Get the input.
 
@@ -50,11 +50,11 @@ echo "i_num_days_ago $i_num_days_ago"
 
 # Create the $HOME/logs directory if it does not exist yet
 
-if (! -e $HOME/logs) then
-    mkdir $HOME/logs
+set logging_dir = `printenv | grep PURGER_LOGGING | awk -F= '{print $2}'`    # NET edit.
+if (! -e $logging_dir) then    # NET edit.
+    mkdir $logging_dir    # NET edit.
 endif
-
-set log_top_level_directory = "$HOME/logs"
+set log_top_level_directory = $logging_dir     # NET edit.
 
 set today_date = `date '+%m_%d_%y'`
 
@@ -70,8 +70,8 @@ echo "Output has been sent to $log_name"
 #cat $log_name
 #exit
 
-
 # Purge the MODIS_A AQUA_REFINED
+
 set i_data_source = "MODIS_A"
 set i_processing_type = "AQUA_REFINED"
 set log_name = "$log_top_level_directory/modis_level2_purger_${i_data_source}_${i_processing_type}_output_${today_date}.log"
@@ -81,8 +81,8 @@ perl $GHRSST_PERL_LIB_DIRECTORY/purge_l2_temporary_files.pl $i_data_source $i_pr
 echo "Output has been sent to $log_name"
 #cat $log_name
 
-
 # Purge the MODIS_T TERRA_QUICKLOOK
+
 set i_data_source = "MODIS_T"
 set i_processing_type = "TERRA_QUICKLOOK"
 
@@ -94,6 +94,7 @@ echo "Output has been sent to $log_name"
 #cat $log_name
 
 # Purge the MODIS_T TERRA_REFINED
+
 set i_data_source = "MODIS_T"
 set i_processing_type = "TERRA_REFINED"
 set log_name = "$log_top_level_directory/modis_level2_purger_${i_data_source}_${i_processing_type}_output_${today_date}.log"
