@@ -61,12 +61,12 @@ my $sigevent_msg = "hello there";
 my $sigevent_email_to = "DUMMY_EMAIL";
 my $sigevent_url = $ENV{GHRSST_SIGEVENT_URL};
 if ($sigevent_url eq '') {
-    print "You must defined the sigevent URL: i.e. setenv GHRSST_SIGEVENT_URL http://test.jpl.nasa.gov:8100\n"; 
+    print "You must defined the sigevent URL: i.e. setenv GHRSST_SIGEVENT_URL http://test.test.test:8100\n"; 
     die ("Cannot continue until environment GHRSST_SIGEVENT_URL is defined"); 
 }
 
-my $sigevent_clause = "SIGEVENT=" . $sigevent_url . "&category=UNCATEGORIZED&provider=jpl";
-my $temp_dir = "/tmp/";
+my $sigevent_clause = "SIGEVENT=" . $sigevent_url . "&category=GENERATE&provider=jpl";
+my $temp_dir = "/download_task_tracker/tmp/";
 my $msg2report = 7;
 my $sigevent_data = '';
 
@@ -149,9 +149,10 @@ foreach $filename (@$file_list_ref) {
     $minutes_difference_between_file_and_now = sprintf("%.0f",$seconds_difference_between_file_and_now/60);
 
     if ($minutes_difference_between_file_and_now > $i_threshold_in_minutes) {
+        my $file = basename($filename);
         $sigevent_type = "error";
-        $sigevent_msg = "The script for this process [$filename] may be stalled and required attention.";
-        $sigevent_data = "The script for this process [$filename] has been running for more $minutes_difference_between_file_and_now minutes and may required some attention.";
+        $sigevent_msg = "The script for the process: $file may be stalled and required attention as it is $minutes_difference_between_file_and_now minutes old.";
+        $sigevent_data = "The script for this process $file has been running for more $minutes_difference_between_file_and_now minutes and may required some attention.";
         log_this("ERROR",$g_routine_name,$sigevent_msg . "\n");
         ghrsst_notify_operator($g_routine_name,$sigevent_type,$sigevent_msg,$sigevent_email_to,$sigevent_clause,$temp_dir,$msg2report,$sigevent_data);
     } else {

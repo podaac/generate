@@ -18,7 +18,7 @@
 
 # Set the environments.
 
-source /test/download_task_tracker/config/download_task_tracker_config
+source /generate/download_task_tracker/config/download_task_tracker_config
 
 # Get the input.
 
@@ -42,8 +42,9 @@ set threshold_in_minutes = $2
 
 # Create the $HOME/logs directory if it does not exist yet.
 
-if (! -e $HOME/logs) then
-    mkdir $HOME/logs
+set logging_dir = `printenv | grep TASKS_TRACKER_LOGGING | awk -F= '{print $2}'`
+if (! -e $logging_dir) then
+    mkdir $logging_dir
 endif
 
 perl $GHRSST_PERL_LIB_DIRECTORY/modis_level2_download_tasks_tracker.pl -input_directory=$input_directory -threshold_in_minutes=$threshold_in_minutes
