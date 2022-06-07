@@ -1,0 +1,39 @@
+################################################################################
+#
+# This file contains environment variables for running the Download Tasks
+# Tracker component in the Generate Program.
+#
+################################################################################
+
+setenv PATH /usr/local/netcdf/bin:/usr/local/bin:/bin:/usr/bin:/opt/local/bin:/usr/X11R6/bin:./:/usr
+
+# Set environment for sigevent manager.
+
+setenv GHRSST_SIGEVENT_URL http://test.test.test:8080
+
+# Points to where the Perl & IDL codes are installed.
+setenv GHRSST_PERL_LIB_DIRECTORY /test/perl
+setenv GHRSST_IDL_LIB_DIRECTORY  /test/download_task_tracker/idl
+
+# Configuration files
+
+setenv GHRSST_DATA_CONFIG_FILE $GHRSST_PERL_LIB_DIRECTORY/resources/ghrsst_data_config_file.dat
+
+# Email related parameters for sending/receiving emails.
+
+setenv OPS_MODIS_MONITOR_EMAIL_LIST "test@jpl.nasa.gov"
+setenv OPSMAILSRC                   "test@jpl.nasa.gov"
+
+# Scratch directory to store temporary files and registry.
+
+setenv SCRATCH_AREA /data/dev/scratch/test/scratch
+
+# Environment for logging
+
+setenv GAPFARMPROCESSINGLOGFILENAME modis_processing_log_archive.txt # Set to the name of the log file.
+
+# Directories to hold common locks.
+
+setenv SEMAPHORE_LOCK_COMMON_AREA $HOME/
+
+setenv GHRSST_MODIS_L2_COMBINER_DEBUG_MODE false
