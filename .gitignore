@@ -5,6 +5,5 @@ __pycache__
 */idl/install/*.dat
 
 *.terraform/
-.terraform.lock.hcl
 tfplan
 terraform.tfstate*
