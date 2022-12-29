@@ -19,3 +19,28 @@ Generate outputs the following data:
 Generate consists of several components:
 - download list creator: Creates list of files to download (search and download from OBPG).
 - downloader: Downloads files from lists created by the download list creator.
+- combiner: Combines downloaded files into a single NetCDF file.
+- processor: Processes combined files into final L2P granule NetCDF file.
+- error_handler: Handles AWS Batch job failures by logging and notification.
+
+## aws infrastructure
+
+The Generate workflow includes the following AWS services:
+- AWS Batch compute environment with launch template and user-data script, job queue, and scheduling policy for each dataset.
+- Elastic file system for the following components: downloader, combiner, processor.
+- IAM roles and policies for Batch and ECS permissions.
+- S3 bucket to hold final L2P output.
+- Security groups to support EFS network traffic in VPC.
+
+## terraform 
+
+Deploys AWS infrastructure and stores state in an S3 backend using a DynamoDB table for locking. The top-level `terraform` directory contains AWS infrastructure that applies to all components. Each component may have additional terraform files for deploying AWS resources, see each components `README.md` for details.
+
+To deploy:
+1. Edit `terraform.tfvars` for environment to deploy to.
+2. Edit `terraform_conf/backed-{prefix}.conf` for environment deploy.
+3. Initialize terraform: `terraform init -backend-config=terraform_conf/backend-{prefix}.conf`
+4. Plan terraform modifications: `terraform plan -out=tfplan`
+5. Apply terraform modifications: `terraform apply tfplan`
+
+`{prefix}` is the account or environment name.
