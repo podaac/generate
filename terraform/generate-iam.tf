@@ -118,8 +118,6 @@ resource "aws_iam_policy" "batch_service_role_policy" {
         "Condition" : {
           "StringEquals" : {
             "iam:AWSServiceName" : [
-              "spot.amazonaws.com",
-              "spotfleet.amazonaws.com",
               "autoscaling.amazonaws.com",
               "ecs.amazonaws.com"
             ]
