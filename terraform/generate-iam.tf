@@ -14,7 +14,6 @@ resource "aws_iam_role" "aws_batch_service_role" {
     ]
   })
   permissions_boundary = "arn:aws:iam::${local.account_id}:policy/NGAPShRoleBoundary"
-  tags                 = local.default_tags
 }
 
 resource "aws_iam_role_policy_attachment" "aws_batch_service_role_policy_attach" {
@@ -161,7 +160,6 @@ resource "aws_iam_role" "ecs_instance_role" {
     ]
   })
   permissions_boundary = "arn:aws:iam::${local.account_id}:policy/NGAPShRoleBoundary"
-  tags                 = local.default_tags
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_role_ec2_policy_attach" {

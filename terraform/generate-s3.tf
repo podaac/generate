@@ -1,7 +1,7 @@
 # S3 Bucket to hold final L2P granules
 resource "aws_s3_bucket" "aws_s3_bucket_final_granules" {
   bucket = "${var.prefix}-l2p-granules"
-  tags   = merge(local.default_tags, { Name = "${var.prefix}-l2p-granules" })
+  tags   = { Name = "${var.prefix}-l2p-granules" }
 }
 
 resource "aws_s3_bucket_public_access_block" "aws_s3_bucket_idl_server_public_block" {

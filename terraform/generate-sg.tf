@@ -2,7 +2,6 @@ resource "aws_security_group" "efs_sg" {
   name        = "${var.prefix}-efs-mount-target"
   description = "Allow NFS traffic to EFS mount targets"
   vpc_id      = data.aws_vpc.application_vpc.id
-  tags        = local.default_tags
 }
 
 resource "aws_security_group_rule" "efs_sg_ingress" {
