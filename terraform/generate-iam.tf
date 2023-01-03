@@ -106,7 +106,6 @@ resource "aws_iam_policy" "batch_service_role_policy" {
           "StringEquals" : {
             "iam:PassedToService" : [
               "ec2.amazonaws.com",
-              "ec2.amazonaws.com.cn",
               "ecs-tasks.amazonaws.com"
             ]
           }
