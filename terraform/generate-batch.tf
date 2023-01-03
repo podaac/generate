@@ -44,9 +44,6 @@ resource "aws_batch_compute_environment" "generate_aqua" {
   tags         = local.default_tags
   type         = "MANAGED"
 
-  provisioner "local-exec" {
-    command = "aws ecs --profile ${var.profile} update-cluster-settings --cluster ${trimprefix(aws_batch_compute_environment.generate_aqua.ecs_cluster_arn, "arn:aws:ecs:${var.aws_region}:${local.account_id}:cluster/")} --settings name=containerInsights,value=enabled"
-  }
   depends_on = [
     aws_iam_role.aws_batch_service_role
   ]
@@ -104,9 +101,6 @@ resource "aws_batch_compute_environment" "generate_terra" {
   tags         = local.default_tags
   type         = "MANAGED"
 
-  provisioner "local-exec" {
-    command = "aws ecs --profile ${var.profile} update-cluster-settings --cluster ${trimprefix(aws_batch_compute_environment.generate_terra.ecs_cluster_arn, "arn:aws:ecs:${var.aws_region}:${local.account_id}:cluster/")} --settings name=containerInsights,value=enabled"
-  }
   depends_on = [
     aws_iam_role.aws_batch_service_role
   ]
@@ -164,9 +158,6 @@ resource "aws_batch_compute_environment" "generate_viirs" {
   tags         = local.default_tags
   type         = "MANAGED"
 
-  provisioner "local-exec" {
-    command = "aws ecs --profile ${var.profile} update-cluster-settings --cluster ${trimprefix(aws_batch_compute_environment.generate_viirs.ecs_cluster_arn, "arn:aws:ecs:${var.aws_region}:${local.account_id}:cluster/")} --settings name=containerInsights,value=enabled"
-  }
   depends_on = [
     aws_iam_role.aws_batch_service_role
   ]
