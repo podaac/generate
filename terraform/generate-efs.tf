@@ -4,7 +4,7 @@ resource "aws_efs_file_system" "generate_efs_fs_downloader" {
   creation_token   = "${var.prefix}-downloader"
   encrypted        = true
   performance_mode = "generalPurpose"
-  tags             = merge(local.default_tags, { Name = "${var.prefix}-downloader" })
+  tags             = { Name = "${var.prefix}-downloader" }
 }
 
 # Mount targets
@@ -21,7 +21,7 @@ resource "aws_efs_file_system" "generate_efs_fs_combiner" {
   creation_token   = "${var.prefix}-combiner"
   encrypted        = true
   performance_mode = "generalPurpose"
-  tags             = merge(local.default_tags, { Name = "${var.prefix}-combiner" })
+  tags             = { Name = "${var.prefix}-combiner" }
 }
 
 # Mount targets
@@ -38,7 +38,7 @@ resource "aws_efs_file_system" "generate_efs_fs_processor" {
   creation_token   = "${var.prefix}-processor"
   encrypted        = true
   performance_mode = "generalPurpose"
-  tags             = merge(local.default_tags, { Name = "${var.prefix}-processor" })
+  tags             = { Name = "${var.prefix}-processor" }
 }
 
 # Mount targets

@@ -14,7 +14,6 @@ resource "aws_iam_role" "aws_batch_service_role" {
     ]
   })
   permissions_boundary = "arn:aws:iam::${local.account_id}:policy/NGAPShRoleBoundary"
-  tags                 = local.default_tags
 }
 
 resource "aws_iam_role_policy_attachment" "aws_batch_service_role_policy_attach" {
@@ -40,17 +39,10 @@ resource "aws_iam_policy" "batch_service_role_policy" {
           "ec2:DescribeImages",
           "ec2:DescribeImageAttribute",
           "ec2:DescribeInstanceStatus",
-          "ec2:DescribeSpotInstanceRequests",
-          "ec2:DescribeSpotFleetInstances",
-          "ec2:DescribeSpotFleetRequests",
-          "ec2:DescribeSpotPriceHistory",
           "ec2:DescribeVpcClassicLink",
           "ec2:DescribeLaunchTemplateVersions",
           "ec2:CreateLaunchTemplate",
           "ec2:DeleteLaunchTemplate",
-          "ec2:RequestSpotFleet",
-          "ec2:CancelSpotFleetRequests",
-          "ec2:ModifySpotFleetRequest",
           "ec2:TerminateInstances",
           "ec2:RunInstances",
           "autoscaling:DescribeAccountLimits",
@@ -113,7 +105,6 @@ resource "aws_iam_policy" "batch_service_role_policy" {
           "StringEquals" : {
             "iam:PassedToService" : [
               "ec2.amazonaws.com",
-              "ec2.amazonaws.com.cn",
               "ecs-tasks.amazonaws.com"
             ]
           }
@@ -126,8 +117,6 @@ resource "aws_iam_policy" "batch_service_role_policy" {
         "Condition" : {
           "StringEquals" : {
             "iam:AWSServiceName" : [
-              "spot.amazonaws.com",
-              "spotfleet.amazonaws.com",
               "autoscaling.amazonaws.com",
               "ecs.amazonaws.com"
             ]
@@ -171,7 +160,6 @@ resource "aws_iam_role" "ecs_instance_role" {
     ]
   })
   permissions_boundary = "arn:aws:iam::${local.account_id}:policy/NGAPShRoleBoundary"
-  tags                 = local.default_tags
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_role_ec2_policy_attach" {

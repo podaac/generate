@@ -41,12 +41,8 @@ resource "aws_batch_compute_environment" "generate_aqua" {
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
   state        = "ENABLED"
-  tags         = local.default_tags
   type         = "MANAGED"
 
-  provisioner "local-exec" {
-    command = "aws ecs --profile ${var.profile} update-cluster-settings --cluster ${trimprefix(aws_batch_compute_environment.generate_aqua.ecs_cluster_arn, "arn:aws:ecs:${var.aws_region}:${local.account_id}:cluster/")} --settings name=containerInsights,value=enabled"
-  }
   depends_on = [
     aws_iam_role.aws_batch_service_role
   ]
@@ -61,7 +57,6 @@ resource "aws_batch_scheduling_policy" "generate_aqua" {
       weight_factor    = 1.0
     }
   }
-  tags = local.default_tags
 }
 
 # Job Queue
@@ -71,7 +66,6 @@ resource "aws_batch_job_queue" "aqua" {
   priority              = 10
   compute_environments  = [aws_batch_compute_environment.generate_aqua.arn]
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_aqua.arn
-  tags                  = local.default_tags
 }
 
 # MODIS Terra
@@ -101,12 +95,8 @@ resource "aws_batch_compute_environment" "generate_terra" {
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
   state        = "ENABLED"
-  tags         = local.default_tags
   type         = "MANAGED"
 
-  provisioner "local-exec" {
-    command = "aws ecs --profile ${var.profile} update-cluster-settings --cluster ${trimprefix(aws_batch_compute_environment.generate_terra.ecs_cluster_arn, "arn:aws:ecs:${var.aws_region}:${local.account_id}:cluster/")} --settings name=containerInsights,value=enabled"
-  }
   depends_on = [
     aws_iam_role.aws_batch_service_role
   ]
@@ -121,7 +111,6 @@ resource "aws_batch_scheduling_policy" "generate_terra" {
       weight_factor    = 1.0
     }
   }
-  tags = local.default_tags
 }
 
 # Job Queue
@@ -131,7 +120,6 @@ resource "aws_batch_job_queue" "terra" {
   priority              = 10
   compute_environments  = [aws_batch_compute_environment.generate_terra.arn]
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_terra.arn
-  tags                  = local.default_tags
 }
 
 # VIIRS
@@ -161,12 +149,8 @@ resource "aws_batch_compute_environment" "generate_viirs" {
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
   state        = "ENABLED"
-  tags         = local.default_tags
   type         = "MANAGED"
 
-  provisioner "local-exec" {
-    command = "aws ecs --profile ${var.profile} update-cluster-settings --cluster ${trimprefix(aws_batch_compute_environment.generate_viirs.ecs_cluster_arn, "arn:aws:ecs:${var.aws_region}:${local.account_id}:cluster/")} --settings name=containerInsights,value=enabled"
-  }
   depends_on = [
     aws_iam_role.aws_batch_service_role
   ]
@@ -181,7 +165,6 @@ resource "aws_batch_scheduling_policy" "generate_viirs" {
       weight_factor    = 1.0
     }
   }
-  tags = local.default_tags
 }
 
 # Job Queue
@@ -191,5 +174,4 @@ resource "aws_batch_job_queue" "viirs" {
   priority              = 10
   compute_environments  = [aws_batch_compute_environment.generate_viirs.arn]
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_viirs.arn
-  tags                  = local.default_tags
 }
