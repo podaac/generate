@@ -20,6 +20,13 @@ resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_viirs" {
   value = "4"
 }
 
+# Floating
+resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_floating" {
+  name = "${var.prefix}-idl-floating"
+  type = "String"
+  value = "4"
+}
+
 # Retrieval indicator
 resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_ret" {
   name = "${var.prefix}-idl-retrieving_license"
