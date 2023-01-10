@@ -23,6 +23,13 @@ Generate consists of several components:
 - processor: Processes combined files into final L2P granule NetCDF file.
 - error_handler: Handles AWS Batch job failures by logging and notification.
 
+Component repo links:
+- download list creator: https://github.com/podaac/generate_download_list_creator
+- downloader: https://github.com/podaac/generate_downloader
+- combiner: https://github.com/podaac/generate_combiner
+- processor: https://github.com/podaac/generate_processor
+- error_handler: https://github.com/podaac/generate_error_handler
+
 ## aws infrastructure
 
 The Generate workflow includes the following AWS services:
