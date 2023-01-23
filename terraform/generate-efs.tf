@@ -18,5 +18,17 @@ resource "aws_efs_mount_target" "generate_efs_mt" {
 # Access point
 resource "aws_efs_access_point" "generate_efs_ap" {
   file_system_id = aws_efs_file_system.generate_efs_fs.id
-  tags           = { Name = "${var.prefix}-access-point" }
+  tags           = { Name = "${var.prefix}-partition-submit" }
+  posix_user {
+    gid = 1000
+    uid = 1000
+  }
+  root_directory {
+    creation_info {
+      owner_gid   = 1000
+      owner_uid   = 1000
+      permissions = 0755
+    }
+    path = "/"
+  }
 }
