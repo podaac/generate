@@ -199,8 +199,8 @@ resource "aws_iam_policy" "aws_ec2_container_service_for_ec2_role" {
 }
 
 # AWS Batch job role
-resource "aws_iam_role" "batch_execution_role" {
-  name = "${var.prefix}-batch-execution-role"
+resource "aws_iam_role" "batch_job_role" {
+  name = "${var.prefix}-batch-job-role"
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -216,13 +216,13 @@ resource "aws_iam_role" "batch_execution_role" {
   permissions_boundary = "arn:aws:iam::${local.account_id}:policy/NGAPShRoleBoundary"
 }
 
-resource "aws_iam_role_policy_attachment" "batch_execution_role_policy_attach" {
-  role       = aws_iam_role.batch_execution_role.name
-  policy_arn = aws_iam_policy.batch_execution_role_policy.arn
+resource "aws_iam_role_policy_attachment" "batch_job_role_policy_attach" {
+  role       = aws_iam_role.batch_job_role.name
+  policy_arn = aws_iam_policy.batch_job_role_policy.arn
 }
 
-resource "aws_iam_policy" "batch_execution_role_policy" {
-  name        = "${var.prefix}-batch-execution-policy"
+resource "aws_iam_policy" "batch_job_role_policy" {
+  name        = "${var.prefix}-batch-job-policy"
   description = "Amazon EC2 Role policy for Amazon EC2 Container Service"
   policy = jsonencode({
     "Version" : "2012-10-17",
@@ -237,11 +237,19 @@ resource "aws_iam_policy" "batch_execution_role_policy" {
       {
         "Effect" : "Allow",
         "Action" : [
-          "logs:CreateLogStream",
+          "logs:CreateLogStream"
+        ],
+        "Resource" : [
+          "${aws_cloudwatch_log_group.generate_cw_log_group_downloader_error.arn}:*"
+        ]
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
           "logs:PutLogEvents"
         ],
         "Resource" : [
-          "${aws_cloudwatch_log_group.generate_cw_log_group_downloader_error.arn}"
+          "arn:aws:logs:${var.aws_region}:${local.account_id}:log-group:${aws_cloudwatch_log_group.generate_cw_log_group_downloader_error.name}:log-stream:*"
         ]
       }
     ]
