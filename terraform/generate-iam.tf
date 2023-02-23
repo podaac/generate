@@ -197,3 +197,53 @@ resource "aws_iam_policy" "aws_ec2_container_service_for_ec2_role" {
     ]
   })
 }
+
+# AWS Batch job role
+resource "aws_iam_role" "batch_execution_role" {
+  name = "${var.prefix}-batch-execution-role"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "ecs-tasks.amazonaws.com"
+        },
+        "Action" : "sts:AssumeRole"
+      }
+    ]
+  })
+  permissions_boundary = "arn:aws:iam::${local.account_id}:policy/NGAPShRoleBoundary"
+}
+
+resource "aws_iam_role_policy_attachment" "batch_execution_role_policy_attach" {
+  role       = aws_iam_role.batch_execution_role.name
+  policy_arn = aws_iam_policy.batch_execution_role_policy.arn
+}
+
+resource "aws_iam_policy" "batch_execution_role_policy" {
+  name        = "${var.prefix}-batch-execution-policy"
+  description = "Amazon EC2 Role policy for Amazon EC2 Container Service"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:DescribeLogGroups"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource" : [
+          "${aws_cloudwatch_log_group.generate_cw_log_group_downloader_error.arn}"
+        ]
+      }
+    ]
+  })
+}
