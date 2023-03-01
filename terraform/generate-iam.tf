@@ -241,7 +241,8 @@ resource "aws_iam_policy" "batch_job_role_policy" {
         ],
         "Resource" : [
           "${aws_cloudwatch_log_group.generate_cw_log_group_downloader_error.arn}:*",
-          "${aws_cloudwatch_log_group.generate_cw_log_group_combiner_error.arn}:*"
+          "${aws_cloudwatch_log_group.generate_cw_log_group_combiner_error.arn}:*",
+          "${aws_cloudwatch_log_group.generate_cw_log_group_processor_error.arn}:*"
         ]
       },
       {
@@ -251,7 +252,8 @@ resource "aws_iam_policy" "batch_job_role_policy" {
         ],
         "Resource" : [
           "arn:aws:logs:${var.aws_region}:${local.account_id}:log-group:${aws_cloudwatch_log_group.generate_cw_log_group_downloader_error.name}:log-stream:*",
-          "arn:aws:logs:${var.aws_region}:${local.account_id}:log-group:${aws_cloudwatch_log_group.generate_cw_log_group_combiner_error.name}:log-stream:*"
+          "arn:aws:logs:${var.aws_region}:${local.account_id}:log-group:${aws_cloudwatch_log_group.generate_cw_log_group_combiner_error.name}:log-stream:*",
+          "arn:aws:logs:${var.aws_region}:${local.account_id}:log-group:${aws_cloudwatch_log_group.generate_cw_log_group_processor_error.name}:log-stream:*"
         ]
       }
     ]
