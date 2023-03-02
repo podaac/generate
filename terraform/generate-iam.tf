@@ -237,7 +237,8 @@ resource "aws_iam_policy" "batch_job_role_policy" {
       {
         "Effect" : "Allow",
         "Action" : [
-          "logs:CreateLogStream"
+          "logs:CreateLogStream",
+          "logs:DescribeLogStreams"
         ],
         "Resource" : [
           "${aws_cloudwatch_log_group.generate_cw_log_group_downloader_error.arn}:*",
@@ -255,6 +256,20 @@ resource "aws_iam_policy" "batch_job_role_policy" {
           "arn:aws:logs:${var.aws_region}:${local.account_id}:log-group:${aws_cloudwatch_log_group.generate_cw_log_group_combiner_error.name}:log-stream:*",
           "arn:aws:logs:${var.aws_region}:${local.account_id}:log-group:${aws_cloudwatch_log_group.generate_cw_log_group_processor_error.name}:log-stream:*"
         ]
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "sns:ListTopics"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "sns:Publish"
+        ],
+        "Resource" : "${data.aws_sns_topic.batch_failure_topic.arn}"
       }
     ]
   })

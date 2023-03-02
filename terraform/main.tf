@@ -36,6 +36,10 @@ data "aws_security_groups" "vpc_default_sg" {
   }
 }
 
+data "aws_sns_topic" "batch_failure_topic" {
+  name = "${var.prefix}-batch-job-failure"
+}
+
 data "aws_ssm_parameter" "ecs_image_id" {
   name = var.ecs_ami_id_ssm_name
 }
