@@ -45,3 +45,8 @@ variable "profile" {
   type        = string
   description = "Named profile to build infrastructure with"
 }
+
+variable "sns_topic_email" {
+  type        = string
+  description = "Email to send SNS Topic messages to"
+}
