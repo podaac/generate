@@ -7,6 +7,7 @@ variable "app_name" {
 variable "app_version" {
   type        = number
   description = "The application version number"
+  default     = 0.1
 }
 
 variable "aws_region" {
@@ -32,8 +33,8 @@ variable "environment" {
 
 variable "instance_type" {
   type        = list(any)
-  default     = ["optimal"]
   description = "List of instance types used by Batch to launch jobs"
+  default     = ["c5.4xlarge", "c5.2xlarge", "c5.xlarge", "c5.large"]
 }
 
 variable "prefix" {
