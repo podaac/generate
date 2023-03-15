@@ -269,7 +269,7 @@ resource "aws_iam_policy" "batch_job_role_policy" {
         "Action" : [
           "sns:Publish"
         ],
-        "Resource" : "${data.aws_sns_topic.batch_failure_topic.arn}"
+        "Resource" : "${aws_sns_topic.aws_sns_topic_batch_job_failure.arn}"
       }
     ]
   })
