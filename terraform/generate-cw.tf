@@ -23,7 +23,6 @@ resource "aws_cloudwatch_log_group" "generate_cw_log_group_combiner_error" {
 }
 
 # Processor
-# CloudWatch Logs
 resource "aws_cloudwatch_log_group" "generate_cw_log_group_processor" {
   name              = "/aws/batch/job/${var.prefix}-processor/"
   retention_in_days = 120
@@ -31,5 +30,11 @@ resource "aws_cloudwatch_log_group" "generate_cw_log_group_processor" {
 
 resource "aws_cloudwatch_log_group" "generate_cw_log_group_processor_error" {
   name              = "/aws/batch/job/${var.prefix}-processor-errors/"
+  retention_in_days = 120
+}
+
+# Uploader
+resource "aws_cloudwatch_log_group" "generate_cw_log_group_uploader" {
+  name              = "/aws/batch/job/${var.prefix}-uploader/"
   retention_in_days = 120
 }
