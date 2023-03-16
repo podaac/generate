@@ -38,3 +38,9 @@ resource "aws_cloudwatch_log_group" "generate_cw_log_group_uploader" {
   name              = "/aws/batch/job/${var.prefix}-uploader/"
   retention_in_days = 120
 }
+
+# CloudWatch Logs
+resource "aws_cloudwatch_log_group" "generate_cw_log_group_license_returner" {
+  name              = "/aws/batch/job/${var.prefix}-license-returner/"
+  retention_in_days = 120
+}
