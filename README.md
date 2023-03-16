@@ -16,19 +16,29 @@ Generate outputs the following data:
 
 ## components
 
+![Generate Component Data Flow Diagram](diagrams/generate-data-flow.png)
+
 Generate consists of several components:
 - download list creator: Creates list of files to download (search and download from OBPG).
+- partition and submit: Partitions downloads into jobs and submits the Generate workflow as AWS Batch jobs.
 - downloader: Downloads files from lists created by the download list creator.
 - combiner: Combines downloaded files into a single NetCDF file.
 - processor: Processes combined files into final L2P granule NetCDF file.
+- uploader: Uploads final L2P granules to an S3 bucket and kick offs archive ingestion.
+- license returner: Returns IDL licenses that were used in the current execution of the Generate workflow.
 - error_handler: Handles AWS Batch job failures by logging and notification.
+- reporter: Generates daily reports on the number of L2P granules that were processed for MODIS Aqua, MODIS Terra, and VIIRS.
 
 Component repo links:
 - download list creator: https://github.com/podaac/generate_download_list_creator
+- parition and submit: https://github.com/podaac/generate_partition_submit
 - downloader: https://github.com/podaac/generate_downloader
 - combiner: https://github.com/podaac/generate_combiner
 - processor: https://github.com/podaac/generate_processor
+- uploader: https://github.com/podaac/generate_uploader
+- license returner: https://github.com/podaac/generate_license_returner
 - error_handler: https://github.com/podaac/generate_error_handler
+- reporter: https://github.com/podaac/generate_reporter
 
 ## aws infrastructure
 
