@@ -52,3 +52,22 @@ resource "aws_efs_access_point" "generate_efs_ap_r" {
     path = "/processor"
   }
 }
+
+# CNM Responder Lambda
+# Access point
+resource "aws_efs_access_point" "generate_efs_ap_cr" {
+  file_system_id = aws_efs_file_system.generate_efs_fs.id
+  tags           = { Name = "${var.prefix}-cnm-responder" }
+  posix_user {
+    gid = 0
+    uid = 0
+  }
+  root_directory {
+    creation_info {
+      owner_gid   = 1000
+      owner_uid   = 1000
+      permissions = 0755
+    }
+    path = "/processor/output"
+  }
+}
