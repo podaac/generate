@@ -34,8 +34,25 @@ resource "aws_efs_access_point" "generate_efs_ap_ps" {
   }
 }
 
+# Error Checker Lambda
+resource "aws_efs_access_point" "generate_efs_ap_ec" {
+  file_system_id = aws_efs_file_system.generate_efs_fs.id
+  tags           = { Name = "${var.prefix}-error-checker" }
+  posix_user {
+    gid = 0
+    uid = 0
+  }
+  root_directory {
+    creation_info {
+      owner_gid   = 1000
+      owner_uid   = 1000
+      permissions = 0755
+    }
+    path = "/"
+  }
+}
+
 # Reporter Lambda
-# Access point
 resource "aws_efs_access_point" "generate_efs_ap_r" {
   file_system_id = aws_efs_file_system.generate_efs_fs.id
   tags           = { Name = "${var.prefix}-reporter" }
@@ -54,7 +71,6 @@ resource "aws_efs_access_point" "generate_efs_ap_r" {
 }
 
 # CNM Responder Lambda
-# Access point
 resource "aws_efs_access_point" "generate_efs_ap_cr" {
   file_system_id = aws_efs_file_system.generate_efs_fs.id
   tags           = { Name = "${var.prefix}-cnm-responder" }

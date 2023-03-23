@@ -34,7 +34,7 @@ variable "environment" {
 variable "instance_type" {
   type        = list(any)
   description = "List of instance types used by Batch to launch jobs"
-  default = ["c5.4xlarge", "c5.2xlarge", "c5.xlarge", "c5.large"]
+  default     = ["c5.4xlarge", "c5.2xlarge", "c5.xlarge", "c5.large"]
 }
 
 variable "prefix" {
