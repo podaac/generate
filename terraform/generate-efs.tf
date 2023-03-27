@@ -87,3 +87,21 @@ resource "aws_efs_access_point" "generate_efs_ap_cr" {
     path = "/processor/output"
   }
 }
+
+# Purger Lambda
+resource "aws_efs_access_point" "generate_efs_ap_p" {
+  file_system_id = aws_efs_file_system.generate_efs_fs.id
+  tags           = { Name = "${var.prefix}-purger" }
+  posix_user {
+    gid = 0
+    uid = 0
+  }
+  root_directory {
+    creation_info {
+      owner_gid   = 1000
+      owner_uid   = 1000
+      permissions = 0755
+    }
+    path = "/"
+  }
+}
