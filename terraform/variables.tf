@@ -16,6 +16,11 @@ variable "aws_region" {
   default     = "us-west-2"
 }
 
+variable "cross_account_id" {
+  type        = string
+  description = "Cross account identifier for Cumulus Topic publication"
+}
+
 variable "default_tags" {
   type    = map(string)
   default = {}

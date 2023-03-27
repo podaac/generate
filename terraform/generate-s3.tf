@@ -29,6 +29,34 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_bucket_fin
   }
 }
 
+# Cross-account bucket policy
+resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
+  bucket = aws_s3_bucket.aws_s3_bucket_final_granules.id
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "DelegateS3Access",
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : [
+            "arn:aws:iam::${var.cross_account_id}:root"
+          ]
+        },
+        "Action" : [
+          "s3:ListBucket",
+          "s3:GetObject*",
+          "s3:PutObject*"
+        ],
+        "Resource" : [
+          "arn:aws:s3:::${var.prefix}-l2p-granules/*",
+          "arn:aws:s3:::${var.prefix}-l2p-granules"
+        ]
+      }
+    ]
+  })
+}
+
 # Bucket to hold download lists
 resource "aws_s3_bucket" "aws_s3_bucket_dlc" {
   bucket = "${var.prefix}-download-lists"
