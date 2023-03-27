@@ -7,31 +7,16 @@ resource "aws_sns_topic" "aws_sns_topic_cnm_response" {
 resource "aws_sns_topic_policy" "aws_sns_topic_cnm_response_policy" {
   arn = aws_sns_topic.aws_sns_topic_cnm_response.arn
   policy = jsonencode({
-    "Version" : "2008-10-17",
-    "Id" : "__default_policy_ID",
+    "Version" : "2012-10-17",
     "Statement" : [
       {
-        "Sid" : "__default_statement_ID",
+        "Sid" : "CumulusSitAccountPublish",
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : "*"
+          "AWS" : "arn:aws:iam::${var.cross_account_id}:root"
         },
-        "Action" : [
-          "SNS:GetTopicAttributes",
-          "SNS:SetTopicAttributes",
-          "SNS:AddPermission",
-          "SNS:RemovePermission",
-          "SNS:DeleteTopic",
-          "SNS:Subscribe",
-          "SNS:ListSubscriptionsByTopic",
-          "SNS:Publish"
-        ],
-        "Resource" : "${aws_sns_topic.aws_sns_topic_cnm_response.arn}",
-        "Condition" : {
-          "StringEquals" : {
-            "AWS:SourceOwner" : "${local.account_id}"
-          }
-        }
+        "Action" : "sns:Publish",
+        "Resource" : "${aws_sns_topic.aws_sns_topic_cnm_response.arn}"
       }
     ]
   })
