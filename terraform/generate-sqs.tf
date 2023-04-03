@@ -1,7 +1,7 @@
 # Download lists
 resource "aws_sqs_queue" "aws_sqs_queue_dlc" {
   name                       = "${var.prefix}-download-lists"
-  visibility_timeout_seconds = 300
+  visibility_timeout_seconds = 60
   sqs_managed_sse_enabled    = true
 }
 
@@ -29,7 +29,7 @@ resource "aws_sqs_queue_policy" "aws_sqs_queue_policy_dlc" {
 # Pending jobs
 resource "aws_sqs_queue" "aws_sqs_queue_pending_jobs" {
   name                       = "${var.prefix}-pending-jobs"
-  visibility_timeout_seconds = 300
+  visibility_timeout_seconds = 60
   sqs_managed_sse_enabled    = true
 }
 
