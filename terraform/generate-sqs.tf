@@ -1,7 +1,7 @@
 # Download lists
 resource "aws_sqs_queue" "aws_sqs_queue_dlc" {
   name                       = "${var.prefix}-download-lists"
-  visibility_timeout_seconds = 20
+  visibility_timeout_seconds = 1800
   sqs_managed_sse_enabled    = true
 }
 
