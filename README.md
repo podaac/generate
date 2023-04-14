@@ -25,9 +25,13 @@ Generate consists of several components:
 - combiner: Combines downloaded files into a single NetCDF file.
 - processor: Processes combined files into final L2P granule NetCDF file.
 - uploader: Uploads final L2P granules to an S3 bucket and kick offs archive ingestion.
+- cnm_responder: Processes CNM messages (responses) published to a SNS Topic.
+- token_creator: Periodically creates or renews the EDL bearer token required to preform CMR queries.
 - license returner: Returns IDL licenses that were used in the current execution of the Generate workflow.
 - error_handler: Handles AWS Batch job failures by logging and notification.
+- error_checker: Checks for any files that have been quarantined and restarts the Generate worfklow for those files.
 - reporter: Generates daily reports on the number of L2P granules that were processed for MODIS Aqua, MODIS Terra, and VIIRS.
+- purger: Deletes files from the EFS mount archive, downloader, combiner, and processor components that are older than a specific threshold.
 
 Component repo links:
 - download list creator: https://github.com/podaac/generate_download_list_creator
@@ -36,9 +40,13 @@ Component repo links:
 - combiner: https://github.com/podaac/generate_combiner
 - processor: https://github.com/podaac/generate_processor
 - uploader: https://github.com/podaac/generate_uploader
+- cnm_responder: https://github.com/podaac/generate_cnm_responder
+- token_creator: https://github.com/podaac/generate-token-creator
 - license returner: https://github.com/podaac/generate_license_returner
 - error_handler: https://github.com/podaac/generate_error_handler
+- error_checker: https://github.com/podaac/generate_error_checker
 - reporter: https://github.com/podaac/generate_reporter
+- purger: https://github.com/podaac/generate_purger
 
 ## aws infrastructure
 
