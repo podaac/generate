@@ -49,8 +49,8 @@ jobs:
         
         # Set TF_VAR environment variables, initialize and run terraform
         run: |
-          echo "TF_VAR_environment=$TARGET_ENV" >> $GITHUB_ENV
-          echo "TF_VAR_prefix=$PREFIX_ENV" >> $GITHUB_ENV
+          echo "TF_VAR_environment=${{ env.TARGET_ENV }}" >> $GITHUB_ENV
+          echo "TF_VAR_prefix=${{ env.PREFIX_ENV }}" >> $GITHUB_ENV
 
           echo "ENVIRONMENT: $TF_VAR_environment"
           echo "PREFIX: $TF_VAR_prefix"
