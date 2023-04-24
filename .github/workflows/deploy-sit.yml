@@ -50,5 +50,8 @@ jobs:
           TF_VAR_sns_topic_email:         ${{ secrets.SNS_TOPIC_EMAIL }}
 
         run: |
-          terraform init -reconfigure -backend-config="bucket=$PREFIX-tf-state" -backend-config="key=generate.tfstate" -backend-config="region=$AWS_DEFAULT_REGION"
+          terraform init -reconfigure \
+              -backend-config="bucket=${PREFIX}-tf-state" \
+              -backend-config="key=generate.tfstate" \
+              -backend-config="region=${AWS_DEFAULT_REGION}"
           terraform apply -auto-approve
