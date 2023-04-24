@@ -37,7 +37,7 @@ jobs:
         run: terraform validate -no-color
       
       # Set up TF_VAR environment variables
-      -name: TF_VAR values
+      - name: TF_VAR values
         run: |
           echo "TF_VAR_environment=$TARGET_ENV" >> $GITHUB_ENV
           echo "TF_VAR_prefix=$PREFIX_ENV" >> $GITHUB_ENV
