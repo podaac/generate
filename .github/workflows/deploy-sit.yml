@@ -54,13 +54,9 @@ jobs:
         
         # Set TF_VAR environment variables, initialize and run terraform
         run: |
-          
-          echo "ENVIRONMENT: $TF_VAR_environment"
-          echo "PREFIX: $TF_VAR_prefix"
+          terraform init -reconfigure \
+              -backend-config="bucket=${PREFIX_ENV}-tf-state" \
+              -backend-config="key=generate.tfstate" \
+              -backend-config="region=${AWS_DEFAULT_REGION}"
 
-          # terraform init -reconfigure \
-          #     -backend-config="bucket=${PREFIX_ENV}-tf-state" \
-          #     -backend-config="key=generate.tfstate" \
-          #     -backend-config="region=${AWS_DEFAULT_REGION}"
-
-          # terraform apply -auto-approve
+          terraform apply -auto-approve
