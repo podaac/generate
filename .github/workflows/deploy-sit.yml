@@ -45,10 +45,14 @@ jobs:
           AWS_DEFAULT_REGION:      us-west-2
           
           TF_VAR_cross_account_id:        ${{ secrets.CROSS_ACCOUNT_ID }}
-          TF_VAR_environment:             $TARGET_ENV
-          TF_VAR_prefix:                  $PREFIX_ENV
           TF_VAR_sns_topic_email:         ${{ secrets.SNS_TOPIC_EMAIL }}
+        
+        # Set TF_VAR environment variables
+        run: |
+          echo "TF_VAR_environment=$TARGET_ENV" >> $GITHUB_ENV
+          echo "TF_VAR_prefix=$PREFIX_ENV" >> $GITHUB_ENV
 
+        # Initialize and run terraform
         run: |
           terraform init -reconfigure \
               -backend-config="bucket=${PREFIX_ENV}-tf-state" \
