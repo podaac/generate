@@ -58,13 +58,13 @@ jobs:
         run: terraform validate -no-color
       
       # Set up TF_VAR and AWS credentials environment variables
-      - name: TF_VAR values
+      - name: TF_VAR and AWS credentials
         run: |
           echo "TF_VAR_environment=$TARGET_ENV" >> $GITHUB_ENV
           echo "TF_VAR_prefix=$PREFIX_ENV" >> $GITHUB_ENV
           echo "TF_VAR_cross_account_id=${{ secrets[format('CROSS_ACCOUNT_ID_{0}', env.TARGET_ENV)] }}" >> $GITHUB_ENV
           echo "TF_VAR_sns_topic_email=${{ secrets[format('SNS_TOPIC_EMAIL_{0}', env.TARGET_ENV)] }}" >> $GITHUB_ENV
-          echo "AWS_ACCESS_KEY_ID=${{ secrets[format('AWS_ACCESS_KEY_ID_SERVICES_SIT_{0}', env.TARGET_ENV)] }}" >> $GITHUB_ENV
+          echo "AWS_ACCESS_KEY_ID=${{ secrets[format('AWS_ACCESS_KEY_ID_SERVICES_{0}', env.TARGET_ENV)] }}" >> $GITHUB_ENV
           echo "AWS_SECRET_ACCESS_KEY=${{ secrets[format('AWS_SECRET_ACCESS_KEY_SERVICES_{0}', env.TARGET_ENV)] }}" >> $GITHUB_ENV
           echo "AWS_DEFAULT_REGION=us-west-2" >> $GITHUB_ENV
 
