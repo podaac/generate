@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - 'development'
+      - 'feature/**'
+      - 'release/**'
+      - 'main'
     tags-ignore:
       - '*'
   # Run workflow manually from the Actions tab
@@ -16,17 +19,35 @@ jobs:
     name: Build and Deploy
     # The type of runner that the job will run on
     runs-on: ubuntu-latest    
-    
     steps:
 
-      # Environment variables based on branch
-      # if: 
-      # env:
-      #   TARGET_ENV: 'SIT'
-      #   PREFIX_ENV: 'service-generate-sit'
+      # SIT environment variables
       - name: Set Environment Variables
+        if: |
+          startsWith(${GITHUB_REF}, refs/heads/development) ||
+          startsWith(${GITHUB_REF}, refs/heads/feature)
         run: |
-          echo "GITHUB REF: ${GITHUB_REF}"
+          echo "TARGET_ENV=SIT" >> $GITHUB_ENV
+          echo "PREFIX_ENV=service-generate-sit" >> $GITHUB_ENV
+      
+      # UAT environment variables
+      - name: Set Environment Variables
+        if: startsWith(${GITHUB_REF}, refs/heads/release) 
+        run: |
+          echo "TARGET_ENV=UAT" >> $GITHUB_ENV
+          echo "PREFIX_ENV=service-generate-uat" >> $GITHUB_ENV
+
+      # OPS environment variables
+      - name: Set Environment Variables
+        if: startsWith(${GITHUB_REF}, refs/heads/main) 
+        run: |
+          echo "TARGET_ENV=OPS" >> $GITHUB_ENV
+          echo "PREFIX_ENV=service-generate-ops" >> $GITHUB_ENV
+
+      - name: Echo environment variables
+        run: |
+          echo "TARGET_ENV: $TARGET_ENV"
+          echo "PREFIX_ENV: $PREFIX_ENV"
 
       # # Check out GitHub repo
       # - uses: actions/checkout@v3
