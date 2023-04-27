@@ -25,7 +25,8 @@ jobs:
       #   TARGET_ENV: 'SIT'
       #   PREFIX_ENV: 'service-generate-sit'
       - name: Set Environment Variables
-        run: echo $GITHUB_HEAD_REF
+        run: |
+          echo "GITHUB REF: ${GITHUB_REF}"
 
       # # Check out GitHub repo
       # - uses: actions/checkout@v3
