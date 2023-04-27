@@ -80,4 +80,4 @@ jobs:
               -backend-config="key=generate.tfstate" \
               -backend-config="region=${AWS_DEFAULT_REGION}"
 
-          terraform apply -auto-approve
+          terraform apply -auto-approve 
