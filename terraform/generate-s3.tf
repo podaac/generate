@@ -86,3 +86,34 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_bucket_dlc
     }
   }
 }
+
+# Bucket to hold IDL client files
+resource "aws_s3_bucket" "aws_s3_bucket_idl_client" {
+  bucket = "${var.prefix}-idl-client"
+  tags   = { Name = "${var.prefix}-idl-client" }
+}
+
+resource "aws_s3_bucket_public_access_block" "aws_s3_bucket_idl_client_public_block" {
+  bucket                  = aws_s3_bucket.aws_s3_bucket_idl_client.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_ownership_controls" "aws_s3_bucket_idl_client_ownership" {
+  bucket = aws_s3_bucket.aws_s3_bucket_idl_client.id
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_bucket_idl_client_encryption" {
+  bucket = aws_s3_bucket.aws_s3_bucket_idl_client.bucket
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+      kms_master_key_id = "aws/s3"
+    }
+  }
+}
