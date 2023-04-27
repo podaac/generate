@@ -62,8 +62,8 @@ jobs:
         run: |
           echo "TF_VAR_environment=$TARGET_ENV" >> $GITHUB_ENV
           echo "TF_VAR_prefix=$PREFIX_ENV" >> $GITHUB_ENV
-          echo "TF_VAR_cross_account_id=${{ secrets.format('CROSS_ACCOUNT_ID_{0}', $TARGET_ENV) }}" >> $GITHUB_ENV
-          echo "TF_VAR_sns_topic_email=${{ secrets.format('SNS_TOPIC_EMAIL_{0}', $TARGET_ENV) }}" >> $GITHUB_ENV
+          echo "TF_VAR_cross_account_id=${{ secrets[format('CROSS_ACCOUNT_ID_{0}', $TARGET_ENV)] }}" >> $GITHUB_ENV
+          echo "TF_VAR_sns_topic_email=${{ secrets[format('SNS_TOPIC_EMAIL_{0}', $TARGET_ENV)] }}" >> $GITHUB_ENV
 
       # Deploy Terraform
       - name: Deploy Terraform
