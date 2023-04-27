@@ -24,22 +24,22 @@ jobs:
       # SIT environment variables
       - name: Set Environment Variables
         if: |
-          startsWith(github.ref, refs/heads/development) ||
-          startsWith(github.ref, refs/heads/feature)
+          startsWith(github.ref, 'refs/heads/development') ||
+          startsWith(github.ref, 'refs/heads/feature')
         run: |
           echo "TARGET_ENV=SIT" >> $GITHUB_ENV
           echo "PREFIX_ENV=service-generate-sit" >> $GITHUB_ENV
       
       # UAT environment variables
       - name: Set Environment Variables
-        if: startsWith(github.ref, refs/heads/release) 
+        if: startsWith(github.ref, 'refs/heads/release') 
         run: |
           echo "TARGET_ENV=UAT" >> $GITHUB_ENV
           echo "PREFIX_ENV=service-generate-uat" >> $GITHUB_ENV
 
       # OPS environment variables
       - name: Set Environment Variables
-        if: startsWith(github.ref, refs/heads/main) 
+        if: startsWith(github.ref, 'refs/heads/main') 
         run: |
           echo "TARGET_ENV=OPS" >> $GITHUB_ENV
           echo "PREFIX_ENV=service-generate-ops" >> $GITHUB_ENV
