@@ -44,7 +44,9 @@ resource "aws_batch_compute_environment" "generate_aqua" {
   type         = "MANAGED"
 
   depends_on = [
-    aws_iam_role.aws_batch_service_role
+    aws_iam_role.aws_batch_service_role, 
+    aws_iam_policy.batch_service_role_policy,
+    aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach 
   ]
 }
 
@@ -98,7 +100,9 @@ resource "aws_batch_compute_environment" "generate_terra" {
   type         = "MANAGED"
 
   depends_on = [
-    aws_iam_role.aws_batch_service_role
+    aws_iam_role.aws_batch_service_role, 
+    aws_iam_policy.batch_service_role_policy,
+    aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
 }
 
@@ -152,7 +156,9 @@ resource "aws_batch_compute_environment" "generate_viirs" {
   type         = "MANAGED"
 
   depends_on = [
-    aws_iam_role.aws_batch_service_role
+    aws_iam_role.aws_batch_service_role, 
+    aws_iam_policy.batch_service_role_policy,
+    aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
 }
 

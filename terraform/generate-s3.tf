@@ -1,6 +1,7 @@
 # S3 Bucket to hold final L2P granules
 resource "aws_s3_bucket" "aws_s3_bucket_final_granules" {
   bucket = "${var.prefix}-l2p-granules"
+  force_destroy = true
   tags   = { Name = "${var.prefix}-l2p-granules" }
 }
 
@@ -59,6 +60,7 @@ resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
 # Bucket to hold download lists
 resource "aws_s3_bucket" "aws_s3_bucket_dlc" {
   bucket = "${var.prefix}-download-lists"
+  force_destroy = true
   tags   = { Name = "${var.prefix}-download-lists" }
 }
 
@@ -90,6 +92,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_bucket_dlc
 # Bucket to hold IDL client files
 resource "aws_s3_bucket" "aws_s3_bucket_idl_client" {
   bucket = "${var.prefix}-idl-client"
+  force_destroy = true
   tags   = { Name = "${var.prefix}-idl-client" }
 }
 
