@@ -1,4 +1,4 @@
-# SSM Parameter Store parameters for IDL idlenses
+# SSM Parameter Store parameters for IDL licenses
 # MODIS Aqua
 resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_aqua" {
   name  = "${var.prefix}-idl-aqua"
@@ -32,4 +32,13 @@ resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_ret" {
   name  = "${var.prefix}-idl-retrieving-license"
   type  = "String"
   value = "False"
+}
+
+# SSM Parameter Store parameter to EDL bearer token
+resource "aws_ssm_parameter" "aws_ssm_parameter_edl_token" {
+  name        = "${var.prefix}-edl-token"
+  description = "Temporary EDL bearer token"
+  type        = "SecureString"
+  value       = "start"
+  overwrite   = true
 }
