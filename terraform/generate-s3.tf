@@ -59,9 +59,9 @@ resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
 
 # Bucket to hold download lists
 resource "aws_s3_bucket" "aws_s3_bucket_dlc" {
-  bucket = "${var.prefix}-download-lists"
+  bucket = "${var.prefix}"
   force_destroy = true
-  tags   = { Name = "${var.prefix}-download-lists" }
+  tags   = { Name = "${var.prefix}" }
 }
 
 resource "aws_s3_bucket_public_access_block" "aws_s3_bucket_dlc_public_block" {
