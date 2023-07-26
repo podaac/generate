@@ -77,3 +77,13 @@ resource "aws_ecr_repository" "reporter" {
     scan_on_push = false
   }
 }
+
+# Purger
+resource "aws_ecr_repository" "purger" {
+  name                 = "${var.prefix}-purger"
+  image_tag_mutability = "MUTABLE"
+  force_delete         = true
+  image_scanning_configuration {
+    scan_on_push = false
+  }
+}
