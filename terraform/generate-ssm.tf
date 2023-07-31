@@ -33,12 +33,3 @@ resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_ret" {
   type  = "String"
   value = "False"
 }
-
-# SSM Parameter Store parameter to EDL bearer token
-resource "aws_ssm_parameter" "aws_ssm_parameter_edl_token" {
-  name        = "${var.prefix}-edl-token"
-  description = "Temporary EDL bearer token"
-  type        = "SecureString"
-  value       = "start"
-  overwrite   = true
-}
