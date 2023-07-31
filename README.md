@@ -69,3 +69,5 @@ To deploy:
 5. Apply terraform modifications: `terraform apply tfplan`
 
 `{prefix}` is the account or environment name.
+
+Codeowners
