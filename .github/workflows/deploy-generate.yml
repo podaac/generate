@@ -57,7 +57,6 @@ jobs:
           args: >
               --org=${{ secrets.SNYK_ORG_ID }}
               --severity-threshold=high
-              --fail-on=all
 
       # SNYK report
       - name: Run Snyk on Python
