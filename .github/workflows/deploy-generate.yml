@@ -47,8 +47,8 @@ jobs:
       # Check out GitHub repo
       - uses: actions/checkout@v3
 
-      # SNYK blocking
-      - name: Run Snyk as a blocking step
+      # SNYK scan and report
+      - name: Run Snyk to test and report
         uses: snyk/actions/iac@master
         env:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -57,17 +57,7 @@ jobs:
           args: >
               --org=${{ secrets.SNYK_ORG_ID }}
               --severity-threshold=high
-
-      # SNYK report
-      - name: Run Snyk on Python
-        uses: snyk/actions/iac@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: monitor
-          args: >
-            --org=${{ secrets.SNYK_ORG_ID }}
-            --project-name=${{ github.repository }}
+              --report
       
       # Set up Terraform
       - name: Setup Terraform
