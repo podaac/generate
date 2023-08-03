@@ -57,7 +57,7 @@ jobs:
           args: >
               --org=${{ secrets.SNYK_ORG_ID }}
               --project-name=${{ github.repository }}
-              --all-projects
+              --detection-depth=5
               --severity-threshold=high
               --fail-on=all
 
