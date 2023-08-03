@@ -49,10 +49,9 @@ jobs:
 
       # SNYK blocking
       - name: Run Snyk as a blocking step
-        uses: snyk/actions/python-3.8@master
+        uses: snyk/actions/iac@master
         env:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        working-directory: ./terraform
         with:
           command: test
           args: >
@@ -63,7 +62,7 @@ jobs:
 
       # SNYK report
       - name: Run Snyk on Python
-        uses: snyk/actions/python-3.8@master
+        uses: snyk/actions/iac@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
