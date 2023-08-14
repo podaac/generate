@@ -66,3 +66,39 @@ resource "aws_sns_topic_subscription" "aws_sns_topic_batch_job_failure_subscript
   protocol  = "email"
   topic_arn = aws_sns_topic.aws_sns_topic_batch_job_failure.arn
 }
+
+# SNS Topic for CloudWatch alarms
+resource "aws_sns_topic" "aws_sns_topic_cloudwatch_alarms" {
+  name         = "${var.prefix}-cloudwatch-alarms"
+  display_name = "${var.prefix}-cloudwatch-alarms"
+}
+
+resource "aws_sns_topic_policy" "aws_sns_topic_cloudwatch_alarms_policy" {
+  arn = aws_sns_topic.aws_sns_topic_cloudwatch_alarms.arn
+  policy = jsonencode({
+    "Version" : "2008-10-17",
+    "Id" : "__default_policy_ID",
+    "Statement" : [
+      {
+        "Sid" : "AllowPublishAlarms",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "cloudwatch.amazonaws.com"
+        },
+        "Action" : "sns:Publish",
+        "Resource" : "${aws_sns_topic.aws_sns_topic_cloudwatch_alarms.arn}",
+        "Condition" : {
+          "ArnLike" : {
+            "aws:SourceArn" : "arn:aws:cloudwatch:${var.aws_region}:${local.account_id}:alarm:*"
+          }
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_sns_topic_subscription" "aws_sns_topic_cloudwatch_alarms_subscription" {
+  endpoint  = var.sns_topic_email_alarms
+  protocol  = "email"
+  topic_arn = aws_sns_topic.aws_sns_topic_cloudwatch_alarms.arn
+}
