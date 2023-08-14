@@ -51,3 +51,8 @@ variable "sns_topic_email" {
   type        = string
   description = "Email to send SNS Topic messages to"
 }
+
+variable "sns_topic_email_alarms" {
+  type        = string
+  description = "Email to send CloudWatch alarms to"
+}

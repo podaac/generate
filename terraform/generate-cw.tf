@@ -1,3 +1,34 @@
+# CloudWatch Alarm
+resource "aws_cloudwatch_metric_alarm" "aws_cloudwatch_ec2_vcpu_alarm" {
+  alarm_name          = "${var.prefix}-ec2-vcpu-alarm"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  threshold           = "85"
+  alarm_description   = "Alarm for when EC2 vCPU usage passes the 85% threshold for all available vCPUs in the account."
+  alarm_actions       = [aws_sns_topic.aws_sns_topic_cloudwatch_alarms.arn]
+  metric_query {
+    id          = "e1"
+    expression  = "m1/SERVICE_QUOTA(m1)*100"
+    label       = "Percentage"
+    return_data = "true"
+  }
+  metric_query {
+    id = "m1"
+    metric {
+      metric_name = "ResourceCount"
+      namespace   = "AWS/Usage"
+      period      = "180"
+      stat        = "Average"
+      dimensions = {
+        Type     = "Resource"
+        Service  = "EC2"
+        Resource = "vCPU"
+        Class    = "Standard/OnDemand"
+      }
+    }
+  }
+}
+
 # CloudWatch Logs
 
 # Downloader
