@@ -30,7 +30,7 @@ resource "aws_batch_compute_environment" "generate_aqua" {
       launch_template_id = aws_launch_template.aws_batch_ce_lt.id
       version            = aws_launch_template.aws_batch_ce_lt.latest_version
     }
-    max_vcpus          = 32
+    max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
     subnets            = data.aws_subnets.private_application_subnets.ids
@@ -44,7 +44,9 @@ resource "aws_batch_compute_environment" "generate_aqua" {
   type         = "MANAGED"
 
   depends_on = [
-    aws_iam_role.aws_batch_service_role
+    aws_iam_role.aws_batch_service_role,
+    aws_iam_policy.batch_service_role_policy,
+    aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
 }
 
@@ -84,7 +86,7 @@ resource "aws_batch_compute_environment" "generate_terra" {
       launch_template_id = aws_launch_template.aws_batch_ce_lt.id
       version            = aws_launch_template.aws_batch_ce_lt.latest_version
     }
-    max_vcpus          = 32
+    max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
     subnets            = data.aws_subnets.private_application_subnets.ids
@@ -98,7 +100,9 @@ resource "aws_batch_compute_environment" "generate_terra" {
   type         = "MANAGED"
 
   depends_on = [
-    aws_iam_role.aws_batch_service_role
+    aws_iam_role.aws_batch_service_role,
+    aws_iam_policy.batch_service_role_policy,
+    aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
 }
 
@@ -138,7 +142,7 @@ resource "aws_batch_compute_environment" "generate_viirs" {
       launch_template_id = aws_launch_template.aws_batch_ce_lt.id
       version            = aws_launch_template.aws_batch_ce_lt.latest_version
     }
-    max_vcpus          = 32
+    max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
     subnets            = data.aws_subnets.private_application_subnets.ids
@@ -152,7 +156,9 @@ resource "aws_batch_compute_environment" "generate_viirs" {
   type         = "MANAGED"
 
   depends_on = [
-    aws_iam_role.aws_batch_service_role
+    aws_iam_role.aws_batch_service_role,
+    aws_iam_policy.batch_service_role_policy,
+    aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
 }
 

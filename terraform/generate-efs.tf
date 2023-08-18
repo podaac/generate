@@ -21,8 +21,8 @@ resource "aws_efs_access_point" "generate_efs_ap_ps" {
   file_system_id = aws_efs_file_system.generate_efs_fs.id
   tags           = { Name = "${var.prefix}-partition-submit" }
   posix_user {
-    gid = 1000
-    uid = 1000
+    gid = 0
+    uid = 0
   }
   root_directory {
     creation_info {
@@ -57,8 +57,8 @@ resource "aws_efs_access_point" "generate_efs_ap_r" {
   file_system_id = aws_efs_file_system.generate_efs_fs.id
   tags           = { Name = "${var.prefix}-reporter" }
   posix_user {
-    gid = 1000
-    uid = 1000
+    gid = 0
+    uid = 0
   }
   root_directory {
     creation_info {
