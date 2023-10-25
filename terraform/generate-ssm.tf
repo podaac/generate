@@ -3,21 +3,21 @@
 resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_aqua" {
   name  = "${var.prefix}-idl-aqua"
   type  = "String"
-  value = "6"
+  value = "13"
 }
 
 # MODIS Terra
 resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_terra" {
   name  = "${var.prefix}-idl-terra"
   type  = "String"
-  value = "6"
+  value = "13"
 }
 
 # VIIRS
 resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_viirs" {
   name  = "${var.prefix}-idl-viirs"
   type  = "String"
-  value = "6"
+  value = "13"
 }
 
 # Floating
