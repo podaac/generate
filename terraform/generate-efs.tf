@@ -4,6 +4,9 @@ resource "aws_efs_file_system" "generate_efs_fs" {
   creation_token   = var.prefix
   encrypted        = true
   performance_mode = "generalPurpose"
+  lifecycle_policy {
+    transition_to_ia = "AFTER_1_DAY"
+  } 
   tags             = { Name = "${var.prefix}" }
 }
 
