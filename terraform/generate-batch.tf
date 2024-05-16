@@ -66,7 +66,10 @@ resource "aws_batch_job_queue" "aqua" {
   name                  = "${var.prefix}-aqua"
   state                 = "ENABLED"
   priority              = 10
-  compute_environments  = [aws_batch_compute_environment.generate_aqua.arn]
+  compute_environment_order {
+    order = 1
+    compute_environment = aws_batch_compute_environment.generate_aqua.arn
+  }
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_aqua.arn
 }
 
@@ -122,7 +125,10 @@ resource "aws_batch_job_queue" "terra" {
   name                  = "${var.prefix}-terra"
   state                 = "ENABLED"
   priority              = 10
-  compute_environments  = [aws_batch_compute_environment.generate_terra.arn]
+  compute_environment_order {
+    order = 1
+    compute_environment = aws_batch_compute_environment.generate_terra.arn
+  }
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_terra.arn
 }
 
@@ -178,6 +184,9 @@ resource "aws_batch_job_queue" "viirs" {
   name                  = "${var.prefix}-viirs"
   state                 = "ENABLED"
   priority              = 10
-  compute_environments  = [aws_batch_compute_environment.generate_viirs.arn]
+  compute_environment_order {
+    order = 1
+    compute_environment = aws_batch_compute_environment.generate_viirs.arn
+  }
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_viirs.arn
 }
