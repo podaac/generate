@@ -1,19 +1,3 @@
-# Compute Environment Launch Template
-resource "aws_launch_template" "aws_batch_ce_lt" {
-  name = "${var.prefix}-batch-compute-environment"
-  block_device_mappings {
-    device_name = "/dev/xvda"
-    ebs {
-      volume_size           = 30
-      delete_on_termination = true
-      encrypted             = true
-      volume_type           = "gp2"
-    }
-  }
-  user_data              = filebase64("user-data")
-  update_default_version = "true"
-}
-
 # MODIS Aqua
 # Compute Environment
 resource "aws_batch_compute_environment" "generate_aqua" {
@@ -26,10 +10,6 @@ resource "aws_batch_compute_environment" "generate_aqua" {
     }
     instance_role = aws_iam_instance_profile.ecs_instance_profile.arn
     instance_type = var.instance_type
-    launch_template {
-      launch_template_id = aws_launch_template.aws_batch_ce_lt.id
-      version            = aws_launch_template.aws_batch_ce_lt.latest_version
-    }
     max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
@@ -85,10 +65,6 @@ resource "aws_batch_compute_environment" "generate_terra" {
     }
     instance_role = aws_iam_instance_profile.ecs_instance_profile.arn
     instance_type = var.instance_type
-    launch_template {
-      launch_template_id = aws_launch_template.aws_batch_ce_lt.id
-      version            = aws_launch_template.aws_batch_ce_lt.latest_version
-    }
     max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
@@ -144,10 +120,6 @@ resource "aws_batch_compute_environment" "generate_viirs" {
     }
     instance_role = aws_iam_instance_profile.ecs_instance_profile.arn
     instance_type = var.instance_type
-    launch_template {
-      launch_template_id = aws_launch_template.aws_batch_ce_lt.id
-      version            = aws_launch_template.aws_batch_ce_lt.latest_version
-    }
     max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids

@@ -7,7 +7,7 @@ variable "app_name" {
 variable "app_version" {
   type        = string
   description = "The application version number"
-  default     = "0.1.3"
+  default     = "0.1.5"
 }
 
 variable "aws_region" {
@@ -27,7 +27,7 @@ variable "default_tags" {
 }
 
 variable "ecs_ami_id_ssm_name" {
-  default     = "image_id_ecs_amz2"
+  default     = "/ngap/amis/image_id_ecs_al2023_x86"
   description = "Name of the SSM Parameter that contains the NGAP approved ECS AMI ID."
 }
 
