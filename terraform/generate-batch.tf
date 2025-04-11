@@ -1,7 +1,7 @@
 # MODIS Aqua
 # Compute Environment
 resource "aws_batch_compute_environment" "generate_aqua" {
-  compute_environment_name = "${var.prefix}-aqua"
+  compute_environment_name = "${var.prefix}-aqua_temp"
   compute_resources {
     allocation_strategy = "BEST_FIT_PROGRESSIVE"
     ec2_configuration {
@@ -60,7 +60,7 @@ resource "aws_batch_job_queue" "aqua" {
 # MODIS Terra
 # Compute Environment
 resource "aws_batch_compute_environment" "generate_terra" {
-  compute_environment_name = "${var.prefix}-terra"
+  compute_environment_name = "${var.prefix}-terra_temp"
   compute_resources {
     allocation_strategy = "BEST_FIT_PROGRESSIVE"
     ec2_configuration {
