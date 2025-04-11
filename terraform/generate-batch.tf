@@ -119,7 +119,7 @@ resource "aws_batch_job_queue" "terra" {
 # VIIRS
 # Compute Environment
 resource "aws_batch_compute_environment" "generate_viirs" {
-  compute_environment_name = "${var.prefix}-viirs"
+  compute_environment_name = "${var.prefix}-viirs_temp"
   compute_resources {
     allocation_strategy = "BEST_FIT_PROGRESSIVE"
     ec2_configuration {
