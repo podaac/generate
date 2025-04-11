@@ -20,6 +20,13 @@ resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_viirs" {
   value = "13"
 }
 
+# JPSS1
+resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_jpss1" {
+  name  = "${var.prefix}-idl-jpss1"
+  type  = "String"
+  value = "13"
+}
+
 # Floating
 resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_floating" {
   name  = "${var.prefix}-idl-floating"
