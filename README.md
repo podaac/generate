@@ -14,7 +14,7 @@ Generate outputs the following data:
 - MODIS_A-JPL-L2P-v2019.0: https://podaac.jpl.nasa.gov/dataset/MODIS_A-JPL-L2P-v2019.0
 - MODIS_T-JPL-L2P-v2019.0: https://podaac.jpl.nasa.gov/dataset/MODIS_T-JPL-L2P-v2019.0
 - VIIRS_NPP-JPL-L2P-v2016.2: https://podaac.jpl.nasa.gov/dataset/VIIRS_NPP-JPL-L2P-v2016.2
-- JPSS1: Coming Soon!
+- VIIRS_JPSS1-JPL-L2P-v2024.0: https://podaac.jpl.nasa.gov/dataset/VIIRS_JPSS1-JPL-L2P-v2024.0
 
 ## components
 
