@@ -28,6 +28,10 @@ resource "aws_batch_compute_environment" "generate_aqua" {
     aws_iam_policy.batch_service_role_policy,
     aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Scheduling Policy
@@ -83,6 +87,10 @@ resource "aws_batch_compute_environment" "generate_terra" {
     aws_iam_policy.batch_service_role_policy,
     aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Scheduling Policy
@@ -138,6 +146,10 @@ resource "aws_batch_compute_environment" "generate_viirs" {
     aws_iam_policy.batch_service_role_policy,
     aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Scheduling Policy
@@ -193,6 +205,10 @@ resource "aws_batch_compute_environment" "generate_jpss1" {
     aws_iam_policy.batch_service_role_policy,
     aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Scheduling Policy
