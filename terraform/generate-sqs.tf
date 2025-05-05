@@ -113,3 +113,32 @@ resource "aws_sqs_queue_policy" "aws_sqs_queue_policy_pending_jobs_viirs" {
     ]
   })
 }
+
+# JPSS1
+resource "aws_sqs_queue" "aws_sqs_queue_pending_jobs_jpss1" {
+  name                       = "${var.prefix}-pending-jobs-jpss1.fifo"
+  visibility_timeout_seconds = 5
+  sqs_managed_sse_enabled    = true
+  fifo_queue                 = true
+}
+
+resource "aws_sqs_queue_policy" "aws_sqs_queue_policy_pending_jobs_jpss1" {
+  queue_url = aws_sqs_queue.aws_sqs_queue_pending_jobs_jpss1.id
+  policy = jsonencode({
+    "Version" : "2008-10-17",
+    "Id" : "__default_policy_ID",
+    "Statement" : [
+      {
+        "Sid" : "__owner_statement",
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : "${local.account_id}"
+        },
+        "Action" : [
+          "SQS:*"
+        ],
+        "Resource" : "${aws_sqs_queue.aws_sqs_queue_pending_jobs_jpss1.arn}"
+      }
+    ]
+  })
+}
