@@ -1,3 +1,21 @@
+# Define roles so AWS Batch can execute jobs
+resource "aws_iam_role" "batch_ecs_execution_role" {
+  name = "${var.prefix}-batch-ecs-execution-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect    = "Allow"
+      Principal = { Service = "ecs-tasks.amazonaws.com" }
+      Action    = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "batch_ecs_execution_role_attach" {
+  role       = aws_iam_role.batch_ecs_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
 # AWS Batch role and policy
 resource "aws_iam_role" "aws_batch_service_role" {
   name = "${var.prefix}-batch-service-role"
