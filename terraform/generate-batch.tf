@@ -260,9 +260,6 @@ resource "aws_batch_compute_environment" "generate_jpss1" {
     aws_iam_role_policy_attachment.aws_batch_service_role_policy_attach
   ]
 
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 # Fargate Compute Environment
