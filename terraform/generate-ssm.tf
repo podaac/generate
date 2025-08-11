@@ -17,7 +17,14 @@ resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_terra" {
 resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_viirs" {
   name  = "${var.prefix}-idl-viirs"
   type  = "String"
-  value = "13"
+  value = "7"
+}
+
+# JPSS1
+resource "aws_ssm_parameter" "aws_ssm_parameter_ps_idl_jpss1" {
+  name  = "${var.prefix}-idl-jpss1"
+  type  = "String"
+  value = "6"
 }
 
 # Floating
