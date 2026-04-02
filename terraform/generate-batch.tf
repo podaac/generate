@@ -8,8 +8,8 @@ resource "aws_batch_compute_environment" "generate_aqua" {
       image_id_override = data.aws_ssm_parameter.ecs_image_id.value
       image_type        = "ECS_AL2"
     }
-    instance_role = aws_iam_instance_profile.ecs_instance_profile.arn
-    instance_type = var.instance_type
+    instance_role      = aws_iam_instance_profile.ecs_instance_profile.arn
+    instance_type      = var.instance_type
     max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
@@ -20,7 +20,7 @@ resource "aws_batch_compute_environment" "generate_aqua" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "ENABLED"
+  state        = "DISABLED"
   type         = "MANAGED"
 
   depends_on = [
@@ -41,9 +41,9 @@ resource "aws_batch_compute_environment" "generate_aqua_fargate" {
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
     # assign_public_ip = true
   }
-  type                     = "MANAGED"
-  state                    = "ENABLED"
-  service_role             = aws_iam_role.aws_batch_service_role.arn
+  type         = "MANAGED"
+  state        = "ENABLED"
+  service_role = aws_iam_role.aws_batch_service_role.arn
 
   depends_on = [
     aws_iam_role.aws_batch_service_role,
@@ -65,11 +65,11 @@ resource "aws_batch_scheduling_policy" "generate_aqua" {
 
 # Job Queue
 resource "aws_batch_job_queue" "aqua" {
-  name                  = "${var.prefix}-aqua"
-  state                 = "ENABLED"
-  priority              = 10
+  name     = "${var.prefix}-aqua"
+  state    = "ENABLED"
+  priority = 10
   compute_environment_order {
-    order = 1
+    order               = 1
     compute_environment = aws_batch_compute_environment.generate_aqua_fargate.arn
   }
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_aqua.arn
@@ -85,8 +85,8 @@ resource "aws_batch_compute_environment" "generate_terra" {
       image_id_override = data.aws_ssm_parameter.ecs_image_id.value
       image_type        = "ECS_AL2"
     }
-    instance_role = aws_iam_instance_profile.ecs_instance_profile.arn
-    instance_type = var.instance_type
+    instance_role      = aws_iam_instance_profile.ecs_instance_profile.arn
+    instance_type      = var.instance_type
     max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
@@ -97,7 +97,7 @@ resource "aws_batch_compute_environment" "generate_terra" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "ENABLED"
+  state        = "DISABLED"
   type         = "MANAGED"
 
   depends_on = [
@@ -118,9 +118,9 @@ resource "aws_batch_compute_environment" "generate_terra_fargate" {
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
     # assign_public_ip = true
   }
-  type                     = "MANAGED"
-  state                    = "ENABLED"
-  service_role             = aws_iam_role.aws_batch_service_role.arn
+  type         = "MANAGED"
+  state        = "ENABLED"
+  service_role = aws_iam_role.aws_batch_service_role.arn
 
   depends_on = [
     aws_iam_role.aws_batch_service_role,
@@ -142,11 +142,11 @@ resource "aws_batch_scheduling_policy" "generate_terra" {
 
 # Job Queue
 resource "aws_batch_job_queue" "terra" {
-  name                  = "${var.prefix}-terra"
-  state                 = "ENABLED"
-  priority              = 10
+  name     = "${var.prefix}-terra"
+  state    = "ENABLED"
+  priority = 10
   compute_environment_order {
-    order = 1
+    order               = 1
     compute_environment = aws_batch_compute_environment.generate_terra_fargate.arn
   }
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_terra.arn
@@ -162,8 +162,8 @@ resource "aws_batch_compute_environment" "generate_viirs" {
       image_id_override = data.aws_ssm_parameter.ecs_image_id.value
       image_type        = "ECS_AL2"
     }
-    instance_role = aws_iam_instance_profile.ecs_instance_profile.arn
-    instance_type = var.instance_type
+    instance_role      = aws_iam_instance_profile.ecs_instance_profile.arn
+    instance_type      = var.instance_type
     max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
@@ -174,7 +174,7 @@ resource "aws_batch_compute_environment" "generate_viirs" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "ENABLED"
+  state        = "DISABLED"
   type         = "MANAGED"
 
   depends_on = [
@@ -195,9 +195,9 @@ resource "aws_batch_compute_environment" "generate_viirs_fargate" {
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
     # assign_public_ip = true
   }
-  type                     = "MANAGED"
-  state                    = "ENABLED"
-  service_role             = aws_iam_role.aws_batch_service_role.arn
+  type         = "MANAGED"
+  state        = "ENABLED"
+  service_role = aws_iam_role.aws_batch_service_role.arn
 
   depends_on = [
     aws_iam_role.aws_batch_service_role,
@@ -219,11 +219,11 @@ resource "aws_batch_scheduling_policy" "generate_viirs" {
 
 # Job Queue
 resource "aws_batch_job_queue" "viirs" {
-  name                  = "${var.prefix}-viirs"
-  state                 = "ENABLED"
-  priority              = 10
+  name     = "${var.prefix}-viirs"
+  state    = "ENABLED"
+  priority = 10
   compute_environment_order {
-    order = 1
+    order               = 1
     compute_environment = aws_batch_compute_environment.generate_viirs_fargate.arn
   }
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_viirs.arn
@@ -239,8 +239,8 @@ resource "aws_batch_compute_environment" "generate_jpss1" {
       image_id_override = data.aws_ssm_parameter.ecs_image_id.value
       image_type        = "ECS_AL2"
     }
-    instance_role = aws_iam_instance_profile.ecs_instance_profile.arn
-    instance_type = var.instance_type
+    instance_role      = aws_iam_instance_profile.ecs_instance_profile.arn
+    instance_type      = var.instance_type
     max_vcpus          = 128
     min_vcpus          = 0
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
@@ -251,7 +251,7 @@ resource "aws_batch_compute_environment" "generate_jpss1" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "ENABLED"
+  state        = "DISABLED"
   type         = "MANAGED"
 
   depends_on = [
@@ -272,9 +272,9 @@ resource "aws_batch_compute_environment" "generate_jpss1_fargate" {
     security_group_ids = data.aws_security_groups.vpc_default_sg.ids
     # assign_public_ip = true
   }
-  type                     = "MANAGED"
-  state                    = "ENABLED"
-  service_role             = aws_iam_role.aws_batch_service_role.arn
+  type         = "MANAGED"
+  state        = "ENABLED"
+  service_role = aws_iam_role.aws_batch_service_role.arn
 
   depends_on = [
     aws_iam_role.aws_batch_service_role,
@@ -296,11 +296,11 @@ resource "aws_batch_scheduling_policy" "generate_jpss1" {
 
 # Job Queue
 resource "aws_batch_job_queue" "jpss1" {
-  name                  = "${var.prefix}-jpss1"
-  state                 = "ENABLED"
-  priority              = 10
+  name     = "${var.prefix}-jpss1"
+  state    = "ENABLED"
+  priority = 10
   compute_environment_order {
-    order = 1
+    order               = 1
     compute_environment = aws_batch_compute_environment.generate_jpss1_fargate.arn
   }
   scheduling_policy_arn = aws_batch_scheduling_policy.generate_jpss1.arn
