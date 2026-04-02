@@ -20,7 +20,7 @@ resource "aws_batch_compute_environment" "generate_aqua" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "DISABLED"
+  state        = "ENABLED"
   type         = "MANAGED"
 
   depends_on = [
@@ -97,7 +97,7 @@ resource "aws_batch_compute_environment" "generate_terra" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "DISABLED"
+  state        = "ENABLED"
   type         = "MANAGED"
 
   depends_on = [
@@ -174,7 +174,7 @@ resource "aws_batch_compute_environment" "generate_viirs" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "DISABLED"
+  state        = "ENABLED"
   type         = "MANAGED"
 
   depends_on = [
@@ -251,7 +251,7 @@ resource "aws_batch_compute_environment" "generate_jpss1" {
     }
   }
   service_role = aws_iam_role.aws_batch_service_role.arn
-  state        = "DISABLED"
+  state        = "ENABLED"
   type         = "MANAGED"
 
   depends_on = [
